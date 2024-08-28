@@ -1,0 +1,30 @@
+Public flag As Boolean
+Public counter As Long
+
+Sub StartInfiniteLoop()
+    'MsgBox "Макрос запущен"
+    counter = 0
+    Dim startTime As Single
+    startTime = Timer ' Запоминаем начальное время
+    While 1
+        If Timer - startTime > 0.1 Then
+            startTime = Timer
+            Call MyCode
+        End If
+        DoEvents
+    Wend
+    
+End Sub
+
+
+Private Sub MyCode()
+    flag = Not flag
+    If flag = True Then
+        ActiveCell.Interior.Color = vbGreen
+        ActiveCell.Value = counter
+    Else
+        ActiveCell.Interior.Pattern = xlNone
+        ActiveCell.Value = " "
+    End If
+    counter = counter + 1
+End Sub
